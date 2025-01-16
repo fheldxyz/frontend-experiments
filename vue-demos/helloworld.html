@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue.js Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<style>
+
+  * {
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  #app {
+    margin: 16px;
+    padding: 16px;
+    background-color: aliceblue;
+  }
+  
+
+</style>
+<body>
+  <div id="app">
+    <h1>{{ message }}</h1>
+
+    <!-- Two-way data binding -->
+    <input v-model="inputText" placeholder="Type something..." />
+    <p>You typed: {{ inputText }}</p>
+
+    <!-- Conditional rendering -->
+    <button @click="toggleGreeting">{{ showGreeting ? 'Hide' : 'Show' }} Greeting</button>
+    <p v-if="showGreeting">Hello, Vue.js!</p>
+
+    <!-- Loop rendering -->
+    <h2>Items:</h2>
+    <ul>
+      <li v-for="(item, index) in items" :key="index">
+        {{ item }}
+      </li>
+    </ul>
+
+    <!-- Using a component -->
+    <my-component :name="inputText || 'Vue.js'"></my-component>
+  </div>
+
+  <script>
+    // Define a component
+    const MyComponent = {
+      props: ['name'],
+      template: `<p>This is a custom component. Hello, {{ name }}!</p>`
+    };
+
+    // Create Vue app
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Welcome to Vue.js!",
+          inputText: "",
+          showGreeting: true,
+          items: ["Learn Vue", "Build something", "Have fun!"]
+        };
+      },
+      methods: {
+        toggleGreeting() {
+          this.showGreeting = !this.showGreeting;
+        }
+      },
+      components: {
+        'my-component': MyComponent
+      }
+    });
+
+    // Mount Vue app
+    app.mount("#app");
+  </script>
+</body>
+</html>
