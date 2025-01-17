@@ -24,6 +24,10 @@
   <div id="app">
     <h1>{{ message }}</h1>
 
+    <!-- send me a message -->
+    <button @click="toggleGreeting">{{ showGreeting ? 'Hide' : 'Show' }} Greeting</button>
+    <p v-if="showGreeting">Hello, Vue.js!</p>
+
     <!-- Two-way data binding -->
     <input v-model="inputText" placeholder="Type something..." />
     <p>You typed: {{ inputText }}</p>
